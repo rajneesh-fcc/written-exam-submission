@@ -50,13 +50,13 @@ print("Merged DataFrame columns:", user_plan_with_freq.columns.tolist())
 
 # Handle case where column might still be missing due to merge failure
 if 'payment_frequency_code' not in user_plan_with_freq.columns:
-    print("⚠️ Merge failed. Using backup approach.")
+    print("Merge failed. Using backup approach.")
     users_by_payment_type = pd.Series(dtype=int)
 else:
     # Show if any unmatched rows
     missing_freq = user_plan_with_freq['payment_frequency_code'].isna().sum()
     if missing_freq > 0:
-        print(f"⚠️ {missing_freq} rows could not be matched with payment_frequency_code.")
+        print(f"{missing_freq} rows could not be matched with payment_frequency_code.")
 
     # Count unique users per frequency
     users_by_payment_type = user_plan_with_freq.groupby('payment_frequency_code')['user_id'].nunique()
